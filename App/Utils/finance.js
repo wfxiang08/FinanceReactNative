@@ -25,6 +25,9 @@ exports.getStock = function(opts: Object, type: string) : Object {
 
   console.log(opts.stock);
 
+  // 注意type
+  // 注意SQL的处理，是否需要转义呢?
+  //
   var query = defs.query[type]
     .replace('{stock}', opts.stock)
     .replace('{startDate}', opts.startDate)
@@ -121,6 +124,7 @@ exports.properties = [
 ];
 
 exports.getNews = function(symbol: string) : Object {
+	// 读取新闻, 然后呢？直接Debug
   var url = 'http://feeds.finance.yahoo.com/rss/2.0/headline?s=' + symbol + '&region=US&lang=en-US';
   console.log(url);
   return fetch(url)

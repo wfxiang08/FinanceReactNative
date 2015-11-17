@@ -26,6 +26,7 @@ var DetailsPage = React.createClass({
             {this.props.watchlistResult && this.props.watchlistResult[this.props.stock.symbol] && this.props.watchlistResult[this.props.stock.symbol].Name || '--'}
           </Text>
         </View>
+        {/* 以表格的形式展示股票信息 */}
         <View style={styles.details}>
           <View style={styles.detailsRow}>
             <View style={styles.detailsRowColumn}>

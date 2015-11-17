@@ -8,22 +8,23 @@ var {
   Text,
   TouchableHighlight,
   View,
-} = React;
+  } = React;
 
 // Styles
 var styles = require('./style');
 
 var ChartsPage = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       timeSpan: '1D',
     };
   },
 
-  render: function() {
+  render: function () {
     return (
       <View style={styles.container}>
+        {/* 排版 TimeSpan的按钮, 注意样式如何和state绑定 */}
         <View style={styles.timeSpanGroup}>
           <TouchableHighlight
             style={styles.timeSpan}
@@ -41,7 +42,7 @@ var ChartsPage = React.createClass({
             style={styles.timeSpan}
             onPress={() => this.setState({timeSpan: '5D'})}
             underlayColor='#202020'>
-          <Text style={(() => {
+            <Text style={(() => {
             switch (this.state.timeSpan === '5D') {
               case true:                   return styles.timeSpanSelectedText;
               case false:                  return styles.timeSpanText;
@@ -110,10 +111,11 @@ var ChartsPage = React.createClass({
             })()}>2Y</Text>
           </TouchableHighlight>
         </View>
+        {/* 图片如何切换呢? */}
         <View style={styles.chart}>
-        <Image
-          style={styles.image}
-          source={{uri: 'http://chart.finance.yahoo.com/z?s=' + this.props.stock.symbol + '&t=' + this.state.timeSpan.toLowerCase() + '&random=' + new Date().getTime()}} />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://chart.finance.yahoo.com/z?s=' + this.props.stock.symbol + '&t=' + this.state.timeSpan.toLowerCase() + '&random=' + new Date().getTime()}}/>
         </View>
       </View>
     );

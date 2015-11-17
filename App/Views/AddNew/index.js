@@ -68,6 +68,7 @@ var AddNewView = React.createClass({
         <Text style={styles.helpText}>
           {this.state.helpText}
         </Text>
+        {/* 搜索部分的逻辑 */}
         <View style={styles.searchBar}>
           <TextInput
             style={styles.searchBarInput}
@@ -86,6 +87,7 @@ var AddNewView = React.createClass({
   		    	</Text>
   		  	</TouchableHighlight>
         </View>
+        {/* 建议 */}
         <View style={styles.suggestion}>
           <ListView
             dataSource={this.state.dataSource}

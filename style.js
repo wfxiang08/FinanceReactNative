@@ -17,7 +17,7 @@ module.exports = StyleSheet.create({
   },
   statusBar: {
     height: 20,
-    backgroundColor: 'white',
+    backgroundColor: 'red',
   },
   navBar: {
     flex: 1,

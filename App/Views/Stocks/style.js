@@ -38,7 +38,7 @@ module.exports = StyleSheet.create({
     color: 'white',
   },
   stocksListView: {
-    flex: 3,
+    flex: 1,
     backgroundColor: 'black',
   },
   yahoo: {
@@ -48,6 +48,7 @@ module.exports = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
+    // 注意: textAlign样式
     textAlign: 'left',
   },
   footerMiddle: {
@@ -60,6 +61,7 @@ module.exports = StyleSheet.create({
   },
   settings: {
     flex: 1,
+    // 内部的内容又对齐
     alignItems: 'flex-end',
   },
   icon: {

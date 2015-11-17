@@ -41,22 +41,28 @@ var SettingsView = React.createClass({
 
   getInitialState() {
     return {
+      // 如何改变数据呢?
+      // 数据变化了，对应的object也似乎要修改
       dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
       loaded: false,
     };
   },
 
   componentDidMount: function() {
+    // 监听这些数据变化(数据总线)
+    // 在Node unMount时，Flux总线会自动注销
     this.listenTo(PropertyStore, this.onChangeShowingProperty);
     this.listenTo(StockStore, this.onDeleteStock);
     this.listenTo(StockStore, this.onUpdateStocks);
 
+    // 从store中读取数据
     store.get('showingProperty').then((result) => {
       this.setState({
         showingProperty: result,
       });
     });
 
+    // 同时读取两个数据?
     store.get('watchlist').then((watchlist) => {
       store.get('watchlistResult').then((result) => {
         this._genRows(watchlist, result);
@@ -83,6 +89,8 @@ var SettingsView = React.createClass({
       showingProperty: value,
     });
     store.save('showingProperty', value);
+
+    // 通知其他地方发生变化
     PropertyActions.changeShowingProperty(value);
   },
 
@@ -95,6 +103,7 @@ var SettingsView = React.createClass({
             renderRow={this.renderStockCell}
           />
         </View>
+        {/*底部的三个按钮，分别控制： showingProperty */}
         <View style={styles.bottomBlock}>
           <TouchableHighlight style={this.state.showingProperty === 'ChangeinPercent' ? styles.buttonLeftSelected: styles.buttonLeft}
               underlayColor='#66CCFF'

@@ -23,6 +23,7 @@ var StockActions = require('./App/Utils/Stock/actions');
 // Views
 var AddNewView = require('./App/Views/AddNew');
 var SettingsView = require('./App/Views/Settings');
+// 注意: require的使用，和python一样，要么导入一个class, 要么导入一个package(带有index.js文件)
 var StocksView = require('./App/Views/Stocks');
 var WebView = require('./App/Views/Web');
 
@@ -148,11 +149,15 @@ var Finance = React.createClass({
       case 'empty':
         //Com <View />;
       case 'stocks':
+        // 默认展示StocksView, 但是没有导航Bar
         Component = StocksView;
         navBar = null;
         break;
       case 'settings':
         Component = SettingsView;
+
+        // 如何直接定义: NavigationBar?
+        // 标题，左右按钮等等
         navBar = <NavigationBar
           style={styles.navBar}
           leftButton={{
@@ -184,6 +189,9 @@ var Finance = React.createClass({
         break;
       }
 
+    // 这个statusBar是如何处理的呢?
+    // 难道: statusBar也是自己绘制的呢?
+    //      NavigationBar的高度包含: statusBar + NavigationBar(?)的高度: 20 + 44
     if (navBar === null) {
       navBar = <View style={styles.statusBar} />;
     }
@@ -199,9 +207,13 @@ var Finance = React.createClass({
   },
 
   render: function() {
+    // 如何分别处理: ios/android
     var renderScene = Platform.OS === 'ios' ? this.renderSceneIOS: this.renderSceneAndroid;
     var configureScene = Platform.OS === 'ios' ? this.configureSceneIOS: this.configureSceneAndroid;
 
+    // 纯JS版的Navigator
+    // Navigator也不一定有NavigationBar
+    //
     return (
       <Navigator
         debugOverlay={false}
@@ -213,4 +225,5 @@ var Finance = React.createClass({
   },
 });
 
+// 导出App
 module.exports = Finance;
